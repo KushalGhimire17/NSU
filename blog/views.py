@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .models import Post
+from django.shortcuts import render, redirect
+from .models import Post, Notice
 from django.core.files.storage import FileSystemStorage
+from .forms import NoticeForm
 
 def home(request):
     return render(request, 'blog/home.html')
@@ -12,13 +13,15 @@ def blog(request):
     return render(request, 'blog/blog.html', context)
 
 def notice(request):
-    context = {}
+    notice_lists = Notice.objects.all()
     if request.method == 'POST':
-        uploaded_file = request.FILES['document']
-        fs = FileSystemStorage()
-        name = fs.save(uploaded_file.name, uploaded_file)
-        context['url'] = fs.url(name)
-    return render(request, 'blog/notice.html', context)
+        form = NoticeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save() 
+            return redirect('notice')
+    else:
+        form = NoticeForm()
+    return render(request, 'blog/notice.html', {'notice_lists':notice_lists, 'form':form})
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})

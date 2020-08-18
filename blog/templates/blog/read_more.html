@@ -11,7 +11,7 @@
         <small class="text-muted">{{ blog.date_posted|date:"F d, Y" }}</small>
       </div>
       <h2><a class="article-title">{{ blog.title }}</a></h2>
-      {{ blog.image }}
+      <img src="{{ blog.image.url }}" alt="{{ blog.title }}" >
       <p class="article-content">{{ blog.content }}</p>
     </div>
   </article>

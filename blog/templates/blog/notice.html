@@ -1,13 +1,42 @@
-{% extends "blog/base.html" %}
-
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-NSU Notices and bigyapti here...
-<form method="post" enctype="multipart/form-data">
+
+{% if user.is_authenticated %}
+<h2>Upload Notice</h2>
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" name="document">
-    <button type="submit">Upload file</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-{% if url %}
-    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
 {% endif %}
+
+<h2>List Notice</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Download</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for note in notice_lists %}
+        <tr>
+            <td>
+                {% if note.cover %}
+                <img src="{{ note.cover.url }}" alt="{{ note.title }}" width="100px">
+                {% else %}
+                <span class="text-muted">No cover</span>
+                {% endif %}    
+            </td>
+            <td>{{ note.title }}</td>
+            <td>
+                <a href="{{ note.notice.url }}" class="btn btn-primary btn-sm" target="_blank">Download</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
