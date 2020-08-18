@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('NSU site admin') }}{% endblock %}
+<h1>Testing </h1>
+{% block branding %}
+<div class="form-group">
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            <h1 id="site-name">
+                <a href="{% url 'admin:index' %}">
+                    <img src="{% static 'images/nsuflag.png' %}" height="40px" />
+                </a>
+            </h1>            
+        </div>
+        <div class="form-group col-md-8 mb-0">
+            <h1>NSU Administration</h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrastyle %}
+<style>
+    #branding h1{
+        color: red;
+        font-size: 20px !important;
+        font-family:'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+    #header{
+        background-color: #1262bd81;
+    }
+</style>
+{% endblock %}
+{% block nav-global %}{% endblock %}
