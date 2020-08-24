@@ -3,40 +3,53 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h2>Upload Notice</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-{% endif %}
-
-<h2>List Notice</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Download</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for note in notice_lists %}
-        <tr>
-            <td>
-                {% if note.cover %}
-                <img src="{{ note.cover.url }}" alt="{{ note.title }}" width="100px">
-                {% else %}
-                <span class="text-muted">No cover</span>
-                {% endif %}    
-            </td>
-            <td>{{ note.title }}</td>
-            <td>
-                <a href="{{ note.notice.url }}" class="btn btn-primary btn-sm" target="_blank">Download</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="jumbotron">
+    <h1 class="display-4">Upload Notice</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="lead">
+        {% csrf_token %}
+        {{ form.title|as_crispy_field }}
+        <div class="row">
+            <div class="col-md-6 ">
+                {{ form.notice|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.cover|as_crispy_field }}
+            </div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-4">Submit</button>
+    </form>    
+  </div>
+  {% endif %}
+<hr>
+<div class="jumbotron">
+    <h1 class="display-4">List Notice</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notice_lists %}
+            <tr>
+                <td>
+                    {% if note.cover %}
+                    <img src="{{ note.cover.url }}" alt="{{ note.title }}" width="100px">
+                    {% else %}
+                    <span class="text-muted">No cover</span>
+                    {% endif %}    
+                </td>
+                <td>{{ note.title }}</td>
+                <td>
+                    <a href="{{ note.notice.url }}" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

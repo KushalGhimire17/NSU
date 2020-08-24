@@ -3,6 +3,8 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<div class="jumbotron">
+    <h1 class="lead display-4 text-center">Create a blog</h1>
 <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.title|as_crispy_field }}
@@ -28,9 +30,26 @@
     </div>
     
 </form>
+</div>
+<hr>
+    <h1 class="lead display-4 text-center">NSU Blogs</h1>
 
+{% for post in posts %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2">{{ post.author }}</a>
+      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+    </div>
+    <h2><a class="article-title">{{ post.title }}</a></h2>
+    <p class="article-content">{{ post.content|truncatewords:"25" }}</p>
+    <a href="{% url 'blog-read_more' post.id %}" class="btn btn-primary btn-sm" target="_blank">Read more</a>
+  </div>
+</article>
+
+{% endfor %}
 {% else %}
-
+<h1 class="lead display-4 text-center">NSU Blogs</h1>
 {% for post in posts %}
     <article class="media content-section">
       <div class="media-body">

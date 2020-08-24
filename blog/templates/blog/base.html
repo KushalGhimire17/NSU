@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     {% if title %}
         <title>Django Blog - {{ title }}</title>
     {% else %}
@@ -29,7 +29,7 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'blog-blog' %}">NSU Blog</a>
+              <a class="nav-item nav-link" href="{% url 'dashboard' %}">NSU Blog</a>
               <a class="nav-item nav-link" href="{% url 'notice' %}">Notice</a>
               <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
             </div>
