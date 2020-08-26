@@ -24,3 +24,6 @@ class Member(models.Model):
 
     def __str__(self):
         return self.username
+
+    def has_add_permission(self, request):
+        return False

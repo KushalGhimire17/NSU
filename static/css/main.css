@@ -50,9 +50,7 @@ a.article-title:hover {
 }
 
 .article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
+  object-fit: cover;
 }
 
 .article-metadata {
@@ -82,3 +80,46 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+@media only screen and (max-width: 576px) {
+  .article-img{
+    object-fit: fill;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .article-img{
+    object-fit: contain;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .article-img{
+    width: 100%;
+  }
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .article-img{
+    width: 100%;
+    height: 300px
+  }
+}
+
+/* 
+@media only screen and (max-width: 1440px) {
+  .article-img{
+    width: 100%;
+    height: 300px
+  }
+} */
+
+@media (min-width: 1200px) {
+  .article-img{
+    width: 100%;
+    height: 300px
+  }
+ }

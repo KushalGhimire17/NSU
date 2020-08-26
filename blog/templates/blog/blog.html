@@ -1,35 +1,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% block content %}
-{% if user.is_authenticated %}
-<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.title|as_crispy_field }}
-    {{ form.author|as_crispy_field }}
-    {{ form.content|as_crispy_field }}
-    <div class="row">
-        <div class="col-md-4">
-            {{ form.date_posted|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{ form.image|as_crispy_field }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i> Submit</button>
-        </div>
-        <div class="col-md-4">
-            <a href="{% url 'post_list' %}" class="btn btn-secondary btn-block btn-lg">
-                <i class="fas fa-stream"></i>Back to list
-            </a>
-        </div>
-    </div>
-    
-</form>
-
-{% else %}
 
 {% for post in posts %}
     <article class="media content-section">
@@ -39,11 +11,14 @@
           <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
         </div>
         <h2><a class="article-title">{{ post.title }}</a></h2>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" class="article-img" height="363"  >
+        {% endif %}
         <p class="article-content">{{ post.content|truncatewords:"25" }}</p>
         <a href="{% url 'blog-read_more' post.id %}" class="btn btn-primary btn-sm" target="_blank">Read more</a>
       </div>
     </article>
 {% endfor %}
 
-{% endif %}
+
 {% endblock content %}

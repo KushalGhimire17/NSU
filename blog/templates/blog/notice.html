@@ -1,28 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-{% if user.is_authenticated %}
-<div class="jumbotron">
-    <h1 class="display-4">Upload Notice</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="lead">
-        {% csrf_token %}
-        {{ form.title|as_crispy_field }}
-        <div class="row">
-            <div class="col-md-6 ">
-                {{ form.notice|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-                {{ form.cover|as_crispy_field }}
-            </div>
-        </div>
-        </div>
-        <button type="submit" class="btn btn-outline-success btn-lg btn-block mt-4">Submit</button>
-    </form>    
-  </div>
-  {% endif %}
-<hr>
 <div class="jumbotron">
     <h1 class="display-4">List Notice</h1>
     <table class="table">
